@@ -3,7 +3,7 @@
 ## install
 
 ```sh
-git clone https://github.com/YumaYX/YS10.git && cd bin
+git clone https://github.com/YumaYX/YS10.git && cd YS10
 sudo make install
 ```
 
