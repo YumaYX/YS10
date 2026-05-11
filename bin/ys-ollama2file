@@ -54,8 +54,8 @@ if __FILE__ == $PROGRAM_NAME
   puts prompt + "\n"
 
   # ollama
-  YS1::Ollama.num_ctx = 8192
-  YS1::Ollama.model = 'gemma4'
+  YS1::Ollama.data.options.num_ctx = 8192
+  YS1::Ollama.data.model = 'gemma4'
   ollama_response = YS1::Ollama.stream(prompt)
   result = body(ollama_response)
 
