@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Check for required arguments
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <directory> <filename_pattern>"
+    exit 1
+fi
+
+# $1 = directory (Ensure it exists and is a directory)
+# $2 = filename pattern
+
+TARGET_DIR="$1"
+PATTERN="$2"
+
+if [ ! -d "$TARGET_DIR" ]; then
+    echo "Error: Directory '$TARGET_DIR' not found or is not a directory."
+    exit 1
+fi
+
+# Use find for safe, reliable searching.
+# -type f: Only search for files (not directories).
+# -iname: Case-insensitive matching for names.
+# The pattern is wrapped in quotes and used in the find command structure.
+find "$TARGET_DIR" -type f -iname "*${PATTERN}*"
