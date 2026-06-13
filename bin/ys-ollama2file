@@ -4,7 +4,9 @@
 require 'ys1'
 
 def body(block)
-  block.to_s.chomp.sub(/\A.*?```[^\n]*\n/m, '').sub(/```.*\z/m, '')
+  block.to_s
+     .sub(/\A```[^\n]*\n?/, '')
+     .sub(/```\s*\z/, '')
 end
 
 def file_ref(file_path)
