@@ -3,29 +3,27 @@
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
-  echo "Usage: $0 <repository>"
-  exit 1
+    echo "Usage: $0 <repository>"
+    exit 1
 fi
 
 REPO="$1"
 
-# Clone repository
-ys-gclone "$REPO"
-
 cd
 
-# Create work directory
-mkdir -p work
+ys-gclone "$REPO"
 
-# Copy everything except .git into work
-find . -mindepth 1 -maxdepth 1 ! -name ".git" ! -name "work" -exec cp -a {} work/ \;
+cd "$REPO"
 
-# Initialize new git repository
-cd work
+mkdir -p ../work
+
+rsync -a --exclude='.git' ./ ../work/
+
+cd ../work
+
 git init
 git add .
 git commit -m "Initial commit"
 
-echo "Done."
-echo "Repository initialized at: $(pwd)"
+echo "Done: $(pwd)"
 
