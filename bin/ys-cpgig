@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+rsync -av --delete --exclude='.git' "$1"/ "$2"
+
