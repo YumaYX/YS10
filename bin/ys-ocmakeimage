@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+[ -f Dockerfile ] && { echo "Error: Dockerfile already exists." >&2; exit 1; }
+
+cat <<'DOCKEREOF' > Dockerfile
+FROM almalinux:9
+
+RUN dnf -y update \
+    && dnf -y install nodejs npm rust cargo rustfmt clippy make git \
+    && dnf clean all
+
+RUN npm install -g opencode-ai \
+    && npm install -g @modelcontextprotocol/server-filesystem
+
+RUN mkdir -p ~/.config/opencode \
+    && cat <<'EOF' > ~/.config/opencode/opencode.json
+{
+  "mcp": {
+    "filesystem": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/work"
+      ],
+      "enabled": true
+    }
+  }
+}
+EOF
+
+WORKDIR /work
+CMD ["opencode"]
+DOCKEREOF
+
+echo "Output: Dockerfile"

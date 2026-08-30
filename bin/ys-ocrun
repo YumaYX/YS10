@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ ! -f Dockerfile ]]; then
+    echo "Error: Dockerfile does not exist." >&2
+    exit 1
+fi
+
+podman image list | grep 'localhost/ocmyapp' && podman run -it --rm -v ./work:/work:Z -w /work --name myapp-container ocmyapp

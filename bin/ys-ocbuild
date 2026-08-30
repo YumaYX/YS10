@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ ! -f Dockerfile ]]; then
+    echo "Error: Dockerfile does not exist." >&2
+    exit 1
+fi
+
+podman build -t ocmyapp .
+
