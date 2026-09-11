@@ -5,4 +5,6 @@ if [[ ! -f Dockerfile ]]; then
     exit 1
 fi
 
+mkdir -p work
+
 podman image list | grep 'localhost/ocmyapp' && podman run -it --rm -v ./work:/work:Z -w /work --name myapp-container ocmyapp
