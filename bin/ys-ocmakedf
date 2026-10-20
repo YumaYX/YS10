@@ -9,7 +9,7 @@ RUN dnf -y update \
     && dnf -y install nodejs npm rust cargo rustfmt clippy make git \
     && dnf clean all
 
-RUN npm install -g opencode-ai \
+RUN npm install -g opencode-ai@latest \
     && npm install -g @modelcontextprotocol/server-filesystem
 
 RUN mkdir -p ~/.config/opencode \
