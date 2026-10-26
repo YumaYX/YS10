@@ -5,5 +5,6 @@ if [[ ! -f Dockerfile ]]; then
     exit 1
 fi
 
+podman rmi localhost/ocmyapp
 podman build -t ocmyapp .
 
