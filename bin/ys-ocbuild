@@ -5,6 +5,8 @@ if [[ ! -f Dockerfile ]]; then
     exit 1
 fi
 
-podman rmi localhost/ocmyapp
+podman ps -a | grep -v CONTAINER | grep 'ocmyapp' | awk '{print $1}' | xargs -I@ podman rm @
+podman image list | grep -v CONTAINER | grep 'ocmyapp' | awk '{print $1}' | xargs -I@ podman rmi @
+
 podman build -t ocmyapp .
 
