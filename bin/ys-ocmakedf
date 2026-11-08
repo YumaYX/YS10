@@ -6,7 +6,7 @@ cat <<'DOCKEREOF' > Dockerfile
 FROM almalinux:9
 
 RUN dnf -y update \
-    && dnf -y install nodejs npm rust cargo rustfmt clippy make git \
+    && dnf -y install nodejs npm make git \
     && dnf clean all
 
 RUN npm install -g opencode-ai@latest \
